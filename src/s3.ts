@@ -1,24 +1,29 @@
 import S3 from "aws-sdk/clients/s3";
 import { config } from "./config";
+import { CustomBucketParams } from "./generated/types";
 
-const bucketConfig = {
+const defaultBucketParams: CustomBucketParams = {
   bucketName: config.bucket.name,
   region: config.bucket.region,
   accessKeyId: config.bucket.access,
-  secretAccessKey: config.bucket.accessSecret,
+  accessKeySecret: config.bucket.accessSecret,
 };
 
-const s3 = new S3(bucketConfig);
-
-export const getFiles = async () => {
-  const content = await getContent({
-    Bucket: bucketConfig.bucketName,
-  });
-
-  return content;
+export const s3Service = (bucketParams?: CustomBucketParams) => {
+  const params = bucketParams ?? defaultBucketParams;
+  const s3 = new S3(params);
+  return {
+    getFiles: async () => {
+      const content = await getContent(s3, {
+        Bucket: params.bucketName,
+      });
+      return content;
+    },
+  };
 };
 
 const getContent = async (
+  s3: S3,
   params: S3.ListObjectsV2Request,
   allKeys: Array<S3.Object> = []
 ) => {
@@ -39,7 +44,7 @@ const getContent = async (
 
   if (response.NextContinuationToken) {
     params.ContinuationToken = response.NextContinuationToken;
-    await getContent(params, allKeys); // RECURSIVE CALL
+    await getContent(s3, params, allKeys);
   }
   return allKeys;
 };

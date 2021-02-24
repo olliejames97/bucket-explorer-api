@@ -3,6 +3,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -20,12 +21,24 @@ export type Query = {
   files: Array<Maybe<File>>;
 };
 
+
+export type QueryFilesArgs = {
+  bucket?: Maybe<CustomBucketParams>;
+};
+
 export type File = {
   __typename?: 'File';
   link: Scalars['String'];
   name: Scalars['String'];
   size?: Maybe<Scalars['Int']>;
   lastModified?: Maybe<Scalars['String']>;
+};
+
+export type CustomBucketParams = {
+  bucketName: Scalars['String'];
+  region: Scalars['String'];
+  accessKeyId: Scalars['String'];
+  accessKeySecret: Scalars['String'];
 };
 
 export enum CacheControlScope {
@@ -116,6 +129,7 @@ export type ResolversTypes = {
   File: ResolverTypeWrapper<File>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  CustomBucketParams: CustomBucketParams;
   CacheControlScope: CacheControlScope;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -127,6 +141,7 @@ export type ResolversParentTypes = {
   File: File;
   String: Scalars['String'];
   Int: Scalars['Int'];
+  CustomBucketParams: CustomBucketParams;
   Upload: Scalars['Upload'];
   Boolean: Scalars['Boolean'];
 };
@@ -137,7 +152,7 @@ export type CacheControlDirectiveArgs = {   maxAge?: Maybe<Scalars['Int']>;
 export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  files?: Resolver<Array<Maybe<ResolversTypes['File']>>, ParentType, ContextType>;
+  files?: Resolver<Array<Maybe<ResolversTypes['File']>>, ParentType, ContextType, RequireFields<QueryFilesArgs, never>>;
 };
 
 export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {

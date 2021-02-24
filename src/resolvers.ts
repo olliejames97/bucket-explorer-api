@@ -1,14 +1,17 @@
 import { config } from "./config";
 import { Resolvers } from "./generated/types";
-import { getFiles } from "./s3";
 import { s3ObjectToGqlFile } from "./helpers";
+import { s3Service } from "./s3";
 
 export const resolvers: Resolvers = {
   Query: {
-    files: async () => {
-      const files = await getFiles();
-      console.log("files", files);
-      return files.map(s3ObjectToGqlFile);
+    files: async (_, args) => {
+      const s3 = s3Service(args.bucket ?? undefined);
+      const files = await s3.getFiles();
+      console.log(args);
+      return files.map((e) =>
+        s3ObjectToGqlFile(e, args ? args.bucket?.bucketName : undefined)
+      );
     },
   },
 };

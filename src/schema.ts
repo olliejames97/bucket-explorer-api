@@ -2,7 +2,7 @@ import { gql } from "apollo-server-lambda";
 
 export const schema = gql`
   type Query {
-    files: [File]!
+    files(bucket: CustomBucketParams): [File]!
   }
 
   type File {
@@ -10,5 +10,12 @@ export const schema = gql`
     name: String!
     size: Int
     lastModified: String
+  }
+
+  input CustomBucketParams {
+    bucketName: String!
+    region: String!
+    accessKeyId: String!
+    accessKeySecret: String!
   }
 `;
