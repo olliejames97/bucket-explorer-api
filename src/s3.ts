@@ -31,7 +31,7 @@ const getContent = async (
     .listObjectsV2(params)
     .promise()
     .catch((e) => {
-      throw new Error(e);
+      throw new Error("Error getting object list: " + e);
     });
 
   if (!response) {

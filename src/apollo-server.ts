@@ -8,4 +8,9 @@ const apolloServer = new ApolloServer({
   typeDefs: schema,
 });
 
-export const graphqlHandler = apolloServer.createHandler();
+export const graphqlHandler = apolloServer.createHandler({
+  cors: {
+    origin: "*",
+    credentials: false,
+  },
+});
