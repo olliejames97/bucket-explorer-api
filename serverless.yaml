@@ -20,4 +20,3 @@ plugins:
 custom:
   webpack:
     includeModules: true
-view raw
