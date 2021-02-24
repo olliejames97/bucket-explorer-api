@@ -4,7 +4,7 @@ import { resolvers } from "./resolvers";
 import { schema } from "./schema";
 
 const apolloServer = new ApolloServer({
-  resolvers,
+  resolvers: resolvers as any,
   typeDefs: schema,
 });
 

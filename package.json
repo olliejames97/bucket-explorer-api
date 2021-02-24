@@ -23,6 +23,7 @@
   "homepage": "https://github.com/olliejames97/bucket-explorer-api#readme",
   "dependencies": {
     "apollo-server-lambda": "^2.21.0",
+    "aws-sdk": "^2.850.0",
     "graphql": "^15.5.0"
   },
   "devDependencies": {

@@ -19,6 +19,13 @@ export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
   secret?: Maybe<Scalars['String']>;
+  files: Array<Maybe<File>>;
+};
+
+export type File = {
+  __typename?: 'File';
+  link: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export enum CacheControlScope {
@@ -107,6 +114,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  File: ResolverTypeWrapper<File>;
   CacheControlScope: CacheControlScope;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -117,6 +125,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {};
   String: Scalars['String'];
+  File: File;
   Upload: Scalars['Upload'];
   Int: Scalars['Int'];
   Boolean: Scalars['Boolean'];
@@ -130,6 +139,13 @@ export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Arg
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   hello?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   secret?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  files?: Resolver<Array<Maybe<ResolversTypes['File']>>, ParentType, ContextType>;
+};
+
+export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {
+  link?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
@@ -138,6 +154,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 
 export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
+  File?: FileResolvers<ContextType>;
   Upload?: GraphQLScalarType;
 };
 
