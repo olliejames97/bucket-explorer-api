@@ -1,0 +1,27 @@
+{
+  "name": "bucket-explorer-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olliejames97/bucket-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olliejames97/bucket-explorer-api/issues"
+  },
+  "homepage": "https://github.com/olliejames97/bucket-explorer-api#readme",
+  "dependencies": {
+    "apollo-server-lambda": "^2.21.0",
+    "graphql": "^15.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.2"
+  }
+}
