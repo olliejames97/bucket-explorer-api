@@ -5,8 +5,6 @@ import { s3ObjectToGqlFile } from "./helpers";
 
 export const resolvers: Resolvers = {
   Query: {
-    hello: () => "world",
-    secret: () => config.secretTest ?? "nope",
     files: async () => {
       const files = await getFiles();
       console.log("files", files);

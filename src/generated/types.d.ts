@@ -17,8 +17,6 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  hello: Scalars['String'];
-  secret?: Maybe<Scalars['String']>;
   files: Array<Maybe<File>>;
 };
 
@@ -26,6 +24,8 @@ export type File = {
   __typename?: 'File';
   link: Scalars['String'];
   name: Scalars['String'];
+  size?: Maybe<Scalars['Int']>;
+  lastModified?: Maybe<Scalars['String']>;
 };
 
 export enum CacheControlScope {
@@ -113,21 +113,21 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   File: ResolverTypeWrapper<File>;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   CacheControlScope: CacheControlScope;
   Upload: ResolverTypeWrapper<Scalars['Upload']>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {};
-  String: Scalars['String'];
   File: File;
-  Upload: Scalars['Upload'];
+  String: Scalars['String'];
   Int: Scalars['Int'];
+  Upload: Scalars['Upload'];
   Boolean: Scalars['Boolean'];
 };
 
@@ -137,14 +137,14 @@ export type CacheControlDirectiveArgs = {   maxAge?: Maybe<Scalars['Int']>;
 export type CacheControlDirectiveResolver<Result, Parent, ContextType = any, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hello?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  secret?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   files?: Resolver<Array<Maybe<ResolversTypes['File']>>, ParentType, ContextType>;
 };
 
 export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {
   link?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  size?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  lastModified?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
