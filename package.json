@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy-prod": "serverless deploy --stage prod",
-    "deploy-dev": "serverless deploy --stage dev"
+    "deploy-dev": "serverless deploy --stage dev",
+    "emulate": "serverless offline start"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "graphql": "^15.5.0"
   },
   "devDependencies": {
+    "serverless-offline": "^6.8.0",
     "serverless-webpack": "^5.3.5",
     "ts-loader": "^8.0.17",
     "typescript": "^4.2.2",
