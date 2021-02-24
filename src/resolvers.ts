@@ -1,5 +1,7 @@
 import { config } from "./config";
-export const resolvers = {
+import { Resolvers } from "./generated/types";
+
+export const resolvers: Resolvers = {
   Query: {
     hello: () => "world",
     secret: () => config.secretTest ?? "nope",
