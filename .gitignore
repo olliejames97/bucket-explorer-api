@@ -1,5 +1,6 @@
 node_modules
 .serverless
 .webpack
-.env.development
-.env.production
+.env.local
+.env.prod
+.env.dev
