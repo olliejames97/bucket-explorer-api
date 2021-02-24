@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy-prod": "serverless deploy --stage prod",
     "deploy-dev": "serverless deploy --stage dev",
-    "emulate": "serverless offline start"
+    "emulate": "serverless offline start",
+    "generate-types": "graphql-codegen"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,8 @@
     "graphql": "^15.5.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.20.1",
+    "@graphql-codegen/typescript": "^1.21.0",
     "serverless-dotenv-plugin": "^3.8.0",
     "serverless-offline": "^6.8.0",
     "serverless-webpack": "^5.3.5",
