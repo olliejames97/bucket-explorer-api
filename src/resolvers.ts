@@ -8,7 +8,6 @@ export const resolvers: Resolvers = {
     files: async (_, args) => {
       const s3 = s3Service(args.bucket ?? undefined);
       const files = await s3.getFiles();
-
       return files.map((e) =>
         s3ObjectToGqlFile(e, args ? args.bucket?.bucketName : undefined)
       );

@@ -1,5 +1,9 @@
 A serverless Apollo GraphGL API, set up to run on LAMBDA
 
+Live here: https://kk1rtpcsn9.execute-api.eu-west-1.amazonaws.com/prod/graphql
+
+Note: The GraphQL playground has the wrong URL by default (see https://github.com/apollographql/apollo-server/issues/2136), It can be used by updating URL with the correct one (Including the "/dev/" or "/prod/" part)
+
 # Set-up
 
 ### Prerequisites
