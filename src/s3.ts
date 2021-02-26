@@ -12,6 +12,7 @@ const defaultBucketParams: CustomBucketParams = {
 export const s3Service = (bucketParams?: CustomBucketParams) => {
   const params = bucketParams ?? defaultBucketParams;
   const s3 = new S3(params);
+
   return {
     getFiles: async () => {
       const content = await getContent(s3, {

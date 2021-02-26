@@ -8,9 +8,11 @@ Note: The GraphQL playground has the wrong URL by default (see https://github.co
 
 ### Prerequisites
 
-- AWS CLI is set-up and configured
+- In order to deploty AWS CLI will need to be set up and configured
 
   ***
+
+### Running locally
 
 1. `npm install`
 2. Create relevant .env files, these will store info about the API's default bucket
@@ -28,5 +30,5 @@ Note: The GraphQL playground has the wrong URL by default (see https://github.co
    ```
 
 3. - `npm run emulate` to run locally
-   - `npm run deploy-dev` to deploy to a dev environment
-   - `npm run deploy-prod` to deploy to a prod environment
+   - `npm run deploy-dev` to deploy to AWS lambda dev environment
+   - `npm run deploy-prod` to deploy to AWS lambda prod environment
