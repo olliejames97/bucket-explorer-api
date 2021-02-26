@@ -9,9 +9,14 @@ const defaultBucketParams: CustomBucketParams = {
   accessKeySecret: config.bucket.accessSecret,
 };
 
-export const s3Service = (bucketParams?: CustomBucketParams) => {
-  const params = bucketParams ?? defaultBucketParams;
-  const s3 = new S3(params);
+export const s3Service = (s3Params?: CustomBucketParams) => {
+  const params = s3Params ?? defaultBucketParams;
+
+  const s3 = new S3({
+    region: params.region,
+    accessKeyId: params.accessKeyId,
+    secretAccessKey: params.accessKeySecret,
+  } as S3.ClientConfiguration);
 
   return {
     getFiles: async () => {
@@ -25,11 +30,11 @@ export const s3Service = (bucketParams?: CustomBucketParams) => {
 
 const getContent = async (
   s3: S3,
-  params: S3.ListObjectsV2Request,
+  bucketParams: S3.ListObjectsV2Request,
   allKeys: Array<S3.Object> = []
 ) => {
   const response = await s3
-    .listObjectsV2(params)
+    .listObjectsV2(bucketParams)
     .promise()
     .catch((e) => {
       throw new Error("Error getting object list: " + e);
@@ -44,8 +49,8 @@ const getContent = async (
   response.Contents.map((obj) => allKeys.push(obj));
 
   if (response.NextContinuationToken) {
-    params.ContinuationToken = response.NextContinuationToken;
-    await getContent(s3, params, allKeys);
+    bucketParams.ContinuationToken = response.NextContinuationToken;
+    await getContent(s3, bucketParams, allKeys);
   }
   return allKeys;
 };
