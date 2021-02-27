@@ -11,6 +11,16 @@ const defaultBucketParams: CustomBucketParams = {
 
 export const s3Service = (s3Params?: CustomBucketParams) => {
   const params = s3Params ?? defaultBucketParams;
+  if (
+    !params.bucketName ||
+    !params.region ||
+    !params.accessKeyId ||
+    !params.accessKeySecret
+  ) {
+    throw new Error(
+      "Error, missing bucket info. to set up a default bucket see the README."
+    );
+  }
 
   const s3 = new S3({
     region: params.region,

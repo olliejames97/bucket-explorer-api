@@ -8,14 +8,15 @@ Note: The GraphQL playground has the wrong URL by default (see https://github.co
 
 ### Prerequisites
 
-- In order to deploty AWS CLI will need to be set up and configured
+- In order to deploy AWS CLI will need to be set up and configured
+- Serverless will need to be installed globally `npm install -g serverless`
 
   ***
 
 ### Running locally
 
 1. `npm install`
-2. Create relevant .env files, these will store info about the API's default bucket
+2. Create relevant .env files, these will store info about the API's default bucket. Note this step can be skipped if client supplies their own bucket info.
 
    - `.env.local` for local development (with serverless offline)
    - `.env.dev` for deployment to dev
