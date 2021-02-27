@@ -18,7 +18,7 @@ export const s3Service = (s3Params?: CustomBucketParams) => {
     !params.accessKeySecret
   ) {
     throw new Error(
-      "Error, missing bucket info. to set up a default bucket see the README."
+      "Error, missing bucket info. Please supply custom bucket details or to set up a default bucket see the API's README."
     );
   }
 
